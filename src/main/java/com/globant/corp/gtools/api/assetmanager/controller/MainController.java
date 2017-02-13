@@ -15,7 +15,7 @@ public class MainController {
     @GetMapping("/asset")
     @CrossOrigin(origins="*", maxAge=3600)
     public Asset getAsset(){
-        return new Asset("Notebook", "Dell - Latitude e7470");
+        return null;
     }
     
 }
