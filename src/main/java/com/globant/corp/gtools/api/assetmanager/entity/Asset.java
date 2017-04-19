@@ -26,22 +26,24 @@ public class Asset {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    private String desc;
-    @Column(name="owner_group")
-    private Integer OwnerGroup;
+    private String description;
+    private boolean stackable;
+    private boolean disabled;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "fk_type")
-    private Type type;
+    @JoinColumn(name = "fk_asset_type0")
+    private AssetType0 assetType0;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "fk_sub_type_1")
-    private SubType1 subType1;
+    @JoinColumn(name = "fk_asset_type1")
+    private AssetType1 assetType1;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "fk_sub_type_2")
-    private SubType2 subType2;
+    @JoinColumn(name = "fk_asset_type2")
+    private AssetType2 assetType2;
 
+    
+    
     public Long getId() {
         return id;
     }
@@ -50,44 +52,52 @@ public class Asset {
         this.id = id;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Integer getOwnerGroup() {
-        return OwnerGroup;
+    public boolean isStackable() {
+        return stackable;
     }
 
-    public void setOwnerGroup(Integer OwnerGroup) {
-        this.OwnerGroup = OwnerGroup;
+    public void setStackable(boolean stackable) {
+        this.stackable = stackable;
     }
 
-    public Type getType() {
-        return type;
+    public AssetType0 getAssetType0() {
+        return assetType0;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setAssetType0(AssetType0 assetType0) {
+        this.assetType0 = assetType0;
     }
 
-    public SubType1 getSubType1() {
-        return subType1;
+    public AssetType1 getAssetType1() {
+        return assetType1;
     }
 
-    public void setSubType1(SubType1 subType1) {
-        this.subType1 = subType1;
+    public void setAssetType1(AssetType1 assetType1) {
+        this.assetType1 = assetType1;
     }
 
-    public SubType2 getSubType2() {
-        return subType2;
+    public AssetType2 getAssetType2() {
+        return assetType2;
     }
 
-    public void setSubType2(SubType2 subType2) {
-        this.subType2 = subType2;
+    public void setAssetType2(AssetType2 assetType2) {
+        this.assetType2 = assetType2;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
     }
 
     

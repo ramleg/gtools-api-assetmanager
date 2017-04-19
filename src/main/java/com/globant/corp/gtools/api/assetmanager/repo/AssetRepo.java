@@ -9,7 +9,7 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface AssetRepo extends CrudRepository<Asset, Long>{
     public Asset findById(Long id);
-    public Iterable<Asset> findByType(Long idType);
-    public Iterable<Asset> findByTypeAndSubType1(Long idType, Long idSubType1);
-    public Iterable<Asset> findByTypeAndSubType1AndSubType2(Long idType, Long idSubType1, Long idSubType2);
+    public Iterable<Asset> findByAssetType0(Long idType0);
+    public Iterable<Asset> findByAssetType0AndAssetType1(Long idType0, Long idType1);
+    public Iterable<Asset> findByAssetType0AndAssetType1AndAssetType2(Long idType0, Long idType1, Long idType2);
 }

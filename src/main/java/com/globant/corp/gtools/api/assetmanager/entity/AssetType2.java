@@ -18,18 +18,18 @@ import javax.persistence.Table;
  *
  * @author Ram
  */
-@Entity(name="SubType2")
-@Table(name="sub_type_2")
-public class SubType2 {
+@Entity(name="AssetType2")
+@Table(name="asset_type2")
+public class AssetType2 {
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    private String desc;
+    private String description;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "fk_sub_type_1")
-    private SubType1 relSubType1;
+    @JoinColumn(name = "fk_asset_type1")
+    private AssetType1 relType1;
 
     public Long getId() {
         return id;
@@ -39,22 +39,19 @@ public class SubType2 {
         this.id = id;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public SubType1 getRelSubType1() {
-        return relSubType1;
+    public AssetType1 getRelType1() {
+        return relType1;
     }
 
-    public void setRelSubType1(SubType1 relSubType1) {
-        this.relSubType1 = relSubType1;
+    public void setRelType1(AssetType1 relType1) {
+        this.relType1 = relType1;
     }
-
-    
-    
 }

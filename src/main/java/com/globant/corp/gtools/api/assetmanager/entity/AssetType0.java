@@ -10,14 +10,14 @@ import javax.persistence.Table;
  *
  * @author Ram
  */
-@Entity(name="Type")
-@Table(name="type")
-public class Type {
+@Entity(name="AssetType0")
+@Table(name="asset_type0")
+public class AssetType0 {
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    private String desc;
+    private String description;
 
     public Long getId() {
         return id;
@@ -27,13 +27,14 @@ public class Type {
         this.id = id;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
+
 
     
     
