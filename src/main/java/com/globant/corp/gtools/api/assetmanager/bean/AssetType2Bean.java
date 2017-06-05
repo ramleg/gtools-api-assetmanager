@@ -7,6 +7,7 @@ package com.globant.corp.gtools.api.assetmanager.bean;
 public class AssetType2Bean {
     Long id;
     String desc;
+    String type1rel;
 
     public AssetType2Bean(Long id, String desc) {
         this.id = id;
@@ -27,6 +28,14 @@ public class AssetType2Bean {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getType1rel() {
+        return type1rel;
+    }
+
+    public void setType1rel(String type1rel) {
+        this.type1rel = type1rel;
     }
     
     

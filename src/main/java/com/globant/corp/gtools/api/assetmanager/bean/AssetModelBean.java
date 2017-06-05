@@ -8,7 +8,7 @@ import com.globant.corp.gtools.api.assetmanager.entity.AssetType0;
  *
  * @author ramiro.acoglanis
  */
-public class AssetBean {
+public class AssetModelBean {
     
     Long id;
     String description;

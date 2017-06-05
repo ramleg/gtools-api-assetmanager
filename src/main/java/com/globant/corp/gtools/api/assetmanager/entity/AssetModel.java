@@ -19,16 +19,16 @@ import javax.persistence.Table;
  *
  * @author ramiro.acoglanis
  */
-@Entity(name="Asset")
-@Table(name="asset")
-public class Asset {
+@Entity(name="AssetModel")
+@Table(name="asset_model")
+public class AssetModel {
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private String description;
-    private boolean stackable;
-    private boolean disabled;
+    private boolean stackable = false;
+    private boolean active = true;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_asset_type0")
@@ -92,12 +92,12 @@ public class Asset {
         this.assetType2 = assetType2;
     }
 
-    public boolean isDisabled() {
-        return disabled;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     

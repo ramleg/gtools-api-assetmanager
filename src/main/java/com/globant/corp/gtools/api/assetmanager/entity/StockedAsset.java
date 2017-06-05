@@ -24,7 +24,7 @@ public class StockedAsset {
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_asset")
-    private Asset assetInfo;
+    private AssetModel assetInfo;
     
     
     
