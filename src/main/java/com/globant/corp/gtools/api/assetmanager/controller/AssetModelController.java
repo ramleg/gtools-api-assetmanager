@@ -21,6 +21,7 @@ import com.globant.corp.gtools.api.assetmanager.service.Utilities;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 /**
  *
@@ -29,6 +30,7 @@ import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/assetmodel")
+@CrossOrigin(origins = "*")
 public class AssetModelController {
     
     @Autowired Utilities util;
@@ -63,18 +65,17 @@ public class AssetModelController {
     }
     
     // disable an assetmodel
-    @RequestMapping(value = "/activation", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/activation", method = RequestMethod.PUT)
     public @ResponseBody String disableAsset(@RequestBody Map<String,String> assetModelData){
         return assetModelService.setActive(Long.parseLong(assetModelData.get("id")), false);
     }
     // enable an assetmodel
-    @RequestMapping(value = "/activation", method = RequestMethod.PUT)
+    @RequestMapping(value = "/deactivation", method = RequestMethod.PUT)
     public @ResponseBody String enableAsset(@RequestBody Map<String,String> assetModelData){
         return assetModelService.setActive(Long.parseLong(assetModelData.get("id")), true);
     }
     
-    //***************************************************************************************************************
-    //***************************************************************************************************************
+    
     //***************************************************************************************************************
     
     
@@ -88,6 +89,31 @@ public class AssetModelController {
     public @ResponseBody List<Map<String,String>> getAssetType0list(@PathVariable("filter") String filter){
         return assetTypeService.getType0List(filter);
     }
+    
+    @RequestMapping(value = "/type0", method = RequestMethod.POST)
+    public @ResponseBody String createType0(@RequestBody Map<String,String> type0){
+        return assetTypeService.create(0, type0.get("description"), null);
+    }
+    
+    @RequestMapping(value = "/type0", method = RequestMethod.PUT)
+    public @ResponseBody String updateType0(@RequestBody Map<String,String> type0){
+        return assetTypeService.update(Long.parseLong(type0.get("id")),0,type0.get("description"),null);
+    }
+    
+    @RequestMapping(value = "/type0/activation", method = RequestMethod.POST)
+    public @ResponseBody String activateType0(@RequestBody Map<String,String> type0){
+        return null;
+    }
+    
+    @RequestMapping(value = "/type0/deactivation", method = RequestMethod.POST)
+    public @ResponseBody String deactivateType0(@RequestBody Map<String,String> type0){
+        return null;
+    }
+    
+    
+    //***************************************************************************************************************
+    
+    
     // filter can accept 'id' to get a particular one
     @GetMapping("/type1/{id}")
     public @ResponseBody Map<String,String> getAssetType1(@PathVariable("id") String id){
@@ -97,17 +123,62 @@ public class AssetModelController {
     // the 'rel' is the 'id' relType0
     @GetMapping("/type1/list/{rel}/{filter}")
     public @ResponseBody List<Map<String,String>> getAssetType1list(@PathVariable("filter") String filter,@PathVariable("rel") String rel){
-        return assetTypeService.getType1List(Long.parseLong(rel),filter);
+        Long r = rel.equals("0")?null:Long.parseLong(rel);
+        return assetTypeService.getType1List(r,filter);
     }
+    
+    @RequestMapping(value = "/type1", method = RequestMethod.POST)
+    public @ResponseBody String createType1(@RequestBody Map<String,String> type1){
+        return assetTypeService.create(1, type1.get("description"), Long.parseLong(type1.get("relType0")));
+    }
+    
+    @RequestMapping(value = "/type1", method = RequestMethod.PUT)
+    public @ResponseBody String updateType1(@RequestBody Map<String,String> type1){
+        return assetTypeService.update(Long.parseLong(type1.get("id")),1,type1.get("description"),Long.parseLong(type1.get("relType0")));
+    }
+    
+    @RequestMapping(value = "/type1/activation", method = RequestMethod.PUT)
+    public @ResponseBody String activateType1(@RequestBody Map<String,String> type0){
+        return null;
+    }
+    
+    @RequestMapping(value = "/type1/deactivation", method = RequestMethod.PUT)
+    public @ResponseBody String deactivateType1(@RequestBody Map<String,String> type0){
+        return null;
+    }
+    
+    //***************************************************************************************************************
+    
+    
     // filter can accept 'id' to get a particular one
     @GetMapping("/type2/{id}")
     public @ResponseBody Map<String,String> getAssetType2(@PathVariable("id") String id){
         return assetTypeService.getType2(id);
     }
     // the 'filter' accepts the words 'enabled' / 'disabled' / 'all'
-    // the 'rel' is the 'id' relType0
+    // the 'rel' is the 'id' relType1
     @GetMapping("/type2/list/{rel}/{filter}")
     public @ResponseBody List<Map<String,String>> getAssetType2list(@PathVariable("filter") String filter,@PathVariable("rel") String rel){
-        return assetTypeService.getType2List(Long.parseLong(rel),filter);
+        Long r = rel.equals("0")?null:Long.parseLong(rel);
+        return assetTypeService.getType2List(r,filter);
     }
+    @RequestMapping(value = "/type2", method = RequestMethod.POST)
+    public @ResponseBody String createType2(@RequestBody Map<String,String> type2){
+        return assetTypeService.create(2, type2.get("description"), Long.parseLong(type2.get("relType0")));
+    }
+    @RequestMapping(value = "/type2", method = RequestMethod.PUT)
+    public @ResponseBody String updateType2(@RequestBody Map<String,String> type2){
+        return assetTypeService.update(Long.parseLong(type2.get("id")),2,type2.get("description"),Long.parseLong(type2.get("relType1")));
+    }
+    
+    @RequestMapping(value = "/type2/activation", method = RequestMethod.PUT)
+    public @ResponseBody String activateType2(@RequestBody Map<String,String> type0){
+        return null;
+    }
+    
+    @RequestMapping(value = "/type2/deactivation", method = RequestMethod.PUT)
+    public @ResponseBody String deactivateType2(@RequestBody Map<String,String> type0){
+        return null;
+    }
+    
 }

@@ -10,8 +10,9 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface AssetType2Repo extends CrudRepository<AssetType2, Long>{
     public AssetType2 findById(Long id);
-    public Iterable<AssetType2> findByActive(boolean active);
-    public Iterable<AssetType2> findByRelType1(AssetType1 rel);
-    public Iterable<AssetType2> findByRelType1AndActive(AssetType1 rel, boolean active);
-    
+    public AssetType2 findByIdAndActive(Long id, boolean active);
+    public Iterable<AssetType2> findAllByOrderByDescriptionAsc();
+    public Iterable<AssetType2> findByActiveOrderByDescriptionAsc(boolean active);
+    public Iterable<AssetType2> findByRelType1OrderByDescriptionAsc(AssetType1 rel);
+    public Iterable<AssetType2> findByRelType1AndActiveOrderByDescriptionAsc(AssetType1 rel,boolean active);
 }

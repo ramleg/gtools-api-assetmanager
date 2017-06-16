@@ -11,6 +11,7 @@ public interface AssetType0Repo extends CrudRepository<AssetType0, Long>{
     
     public AssetType0 findById(Long id);
     public AssetType0 findByIdAndActive(Long id, boolean active);
-    public Iterable<AssetType0> findByActive(boolean  active);
+    public Iterable<AssetType0> findAllByOrderByDescriptionAsc();
+    public Iterable<AssetType0> findByActiveOrderByDescriptionAsc(boolean  active);
     
 }
