@@ -19,10 +19,6 @@ public class GtoolsApiAssetmanagerApplicationTests {
 
     @Autowired
     AssetModelRepo repo;
-    @Autowired
-    AssetType0Repo repo0;
-    @Autowired
-    AssetType1Repo repo1;
     
 	@Test
 	public void contextLoads(){

@@ -26,7 +26,7 @@ public class AssetModel {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    private String description;
+    private String detail;
     private boolean stackable = false;
     private boolean active = true;
     
@@ -37,12 +37,7 @@ public class AssetModel {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_asset_type1")
     private AssetType1 assetType1;
-    
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "fk_asset_type2")
-    private AssetType2 assetType2;
-
-    
+        
     
     public Long getId() {
         return id;
@@ -52,12 +47,12 @@ public class AssetModel {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDetail() {
+        return detail;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 
     public boolean isStackable() {
@@ -82,14 +77,6 @@ public class AssetModel {
 
     public void setAssetType1(AssetType1 assetType1) {
         this.assetType1 = assetType1;
-    }
-
-    public AssetType2 getAssetType2() {
-        return assetType2;
-    }
-
-    public void setAssetType2(AssetType2 assetType2) {
-        this.assetType2 = assetType2;
     }
 
     public boolean isActive() {

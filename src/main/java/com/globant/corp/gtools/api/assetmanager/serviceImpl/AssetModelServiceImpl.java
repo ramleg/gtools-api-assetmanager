@@ -1,6 +1,5 @@
 package com.globant.corp.gtools.api.assetmanager.serviceImpl;
 
-import com.globant.corp.gtools.api.assetmanager.bean.AssetModelBean;
 import com.globant.corp.gtools.api.assetmanager.entity.AssetModel;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.globant.corp.gtools.api.assetmanager.repo.AssetType0Repo;
 import com.globant.corp.gtools.api.assetmanager.repo.AssetType1Repo;
-import com.globant.corp.gtools.api.assetmanager.repo.AssetType2Repo;
 import com.globant.corp.gtools.api.assetmanager.repo.AssetModelRepo;
 import com.globant.corp.gtools.api.assetmanager.service.AssetModelService;
 import java.util.HashMap;
@@ -24,7 +22,6 @@ public class AssetModelServiceImpl implements AssetModelService{
     @Autowired AssetModelRepo assetModelRepo;
     @Autowired AssetType0Repo assetType0Repo;
     @Autowired AssetType1Repo assetType1Repo;
-    @Autowired AssetType2Repo assetType2Repo;
     
     @Override
     public List<Map<String,String>> getList(String filter){
@@ -49,14 +46,10 @@ public class AssetModelServiceImpl implements AssetModelService{
     public Iterable<AssetModel> getByType(Long idType0, Long idType1) {
         return assetModelRepo.findByAssetType0AndAssetType1(idType0, idType1);
     }
-    @Override
-    public Iterable<AssetModel> getByType(Long idType0, Long idType1, Long idType2) {
-        return assetModelRepo.findByAssetType0AndAssetType1AndAssetType2(idType0, idType1, idType2);
-    }
     
 
     @Override
-    public String create(Map<String,String> assetMap) {        
+    public String create(Map<String,String> assetMap) {
         try{
             assetModelRepo.save(buildNewAssetModel(assetMap));
             return "ok";
@@ -106,10 +99,9 @@ public class AssetModelServiceImpl implements AssetModelService{
     private AssetModel buildNewAssetModel(Map<String,String> map){
         try{
             AssetModel asset = new AssetModel();
-            asset.setDescription(map.get("description").equals("")?null:map.get("description"));
             asset.setAssetType0(assetType0Repo.findById(Long.parseLong(map.get("assetType0"))));
             asset.setAssetType1(assetType1Repo.findById(Long.parseLong(map.get("assetType1"))));
-            asset.setAssetType2(assetType2Repo.findById(Long.parseLong(map.get("assetType2"))));
+            asset.setDetail(map.get("detail"));
             asset.setStackable((map.get("stackable").equals("true") ? true : false));
             return asset;
         }catch(Exception e){
@@ -122,10 +114,10 @@ public class AssetModelServiceImpl implements AssetModelService{
     private AssetModel buildUpdateAssetModel(Map<String,String> map){
         try{
             AssetModel asset = assetModelRepo.findById(Long.parseLong(map.get("id")));
-            asset.setDescription(map.get("description").equals("") ? null : map.get("description"));
+            asset.setDetail(map.get("description").equals("") ? null : map.get("description"));
             asset.setAssetType0(assetType0Repo.findById(Long.parseLong(map.get("assetType0"))));
             asset.setAssetType1(assetType1Repo.findById(Long.parseLong(map.get("assetType1"))));
-            asset.setAssetType2(assetType2Repo.findById(Long.parseLong(map.get("assetType2"))));
+            asset.setDetail(map.get("detail"));
             return asset;
         }catch(Exception e){
             //Log Debug lvl
@@ -137,10 +129,9 @@ public class AssetModelServiceImpl implements AssetModelService{
     private Map<String,String> buildAssetModelMap(AssetModel asset){
         Map<String,String> assetModelMap = new HashMap<>();
         assetModelMap.put("id", asset.getId().toString());
-        assetModelMap.put("description", asset.getDescription());
+        assetModelMap.put("detail", asset.getDetail());
         assetModelMap.put("assetType0", asset.getAssetType0().getDescription());
         assetModelMap.put("assetType1", asset.getAssetType1().getDescription());
-        assetModelMap.put("assetType2", asset.getAssetType2().getDescription());
         return assetModelMap;
     }
 

@@ -1,10 +1,8 @@
 package com.globant.corp.gtools.api.assetmanager.controller;
 
-import com.globant.corp.gtools.api.assetmanager.bean.AssetModelBean;
 import com.globant.corp.gtools.api.assetmanager.entity.AssetModel;
 import com.globant.corp.gtools.api.assetmanager.entity.AssetType0;
 import com.globant.corp.gtools.api.assetmanager.entity.AssetType1;
-import com.globant.corp.gtools.api.assetmanager.entity.AssetType2;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -144,40 +142,6 @@ public class AssetModelController {
     
     @RequestMapping(value = "/type1/deactivation", method = RequestMethod.PUT)
     public @ResponseBody String deactivateType1(@RequestBody Map<String,String> type0){
-        return null;
-    }
-    
-    //***************************************************************************************************************
-    
-    
-    // filter can accept 'id' to get a particular one
-    @GetMapping("/type2/{id}")
-    public @ResponseBody Map<String,String> getAssetType2(@PathVariable("id") String id){
-        return assetTypeService.getType2(id);
-    }
-    // the 'filter' accepts the words 'enabled' / 'disabled' / 'all'
-    // the 'rel' is the 'id' relType1
-    @GetMapping("/type2/list/{rel}/{filter}")
-    public @ResponseBody List<Map<String,String>> getAssetType2list(@PathVariable("filter") String filter,@PathVariable("rel") String rel){
-        Long r = rel.equals("0")?null:Long.parseLong(rel);
-        return assetTypeService.getType2List(r,filter);
-    }
-    @RequestMapping(value = "/type2", method = RequestMethod.POST)
-    public @ResponseBody String createType2(@RequestBody Map<String,String> type2){
-        return assetTypeService.create(2, type2.get("description"), Long.parseLong(type2.get("relType0")));
-    }
-    @RequestMapping(value = "/type2", method = RequestMethod.PUT)
-    public @ResponseBody String updateType2(@RequestBody Map<String,String> type2){
-        return assetTypeService.update(Long.parseLong(type2.get("id")),2,type2.get("description"),Long.parseLong(type2.get("relType1")));
-    }
-    
-    @RequestMapping(value = "/type2/activation", method = RequestMethod.PUT)
-    public @ResponseBody String activateType2(@RequestBody Map<String,String> type0){
-        return null;
-    }
-    
-    @RequestMapping(value = "/type2/deactivation", method = RequestMethod.PUT)
-    public @ResponseBody String deactivateType2(@RequestBody Map<String,String> type0){
         return null;
     }
     
